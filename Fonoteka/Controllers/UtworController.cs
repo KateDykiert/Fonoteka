@@ -2,44 +2,40 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Fonoteka.Controllers
 {
-    public class HomeController : Controller
+    public class UtworController : Controller
     {
-        private ZespolDBEntities _db = new ZespolDBEntities();
-        // GET: Home
-
+        private UtworDBEntities _db = new UtworDBEntities();
+        // GET: Utwor
         public ActionResult Index()
         {
-            return View(_db.Zespol.ToList());
+            return View();
         }
 
-        // GET: Home/Details/5
+        // GET: Utwor/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Home/Create
+        // GET: Utwor/Create
         public ActionResult Create()
         {
-            
-        
             return View();
         }
 
         // POST: Home/Create
         [HttpPost]
-        public ActionResult Create([Bind(Exclude="Id")] Utwor zespolToCreate)
+        public ActionResult Create([Bind(Exclude = "Id")] Utwor utworToCreate)
         {
             if (!ModelState.IsValid)
                 return View();
 
-            _db.Zespol.Add(zespolToCreate);
+            _db.Utwor.Add(utworToCreate);
             _db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -48,7 +44,7 @@ namespace Fonoteka.Controllers
         // GET: Home/Edit/5
         public ActionResult Edit(int id)
         {
-            var zespolToEdit = (from z in _db.Zespol where z.IdZespolu == id select z).First();
+            var zespolToEdit = (from z in _db.Utwor where z.IdZespolu == id select z).First();
             return View(zespolToEdit);
         }
 
@@ -56,7 +52,7 @@ namespace Fonoteka.Controllers
         [HttpPost]
         public ActionResult Edit(Utwor zespolToEdit)
         {
-            var originalZespol = (from z in _db.Zespol where z.IdZespolu == zespolToEdit.IdZespolu select z).First();
+            var originalZespol = (from z in _db.Utwor where z.IdZespolu == zespolToEdit.IdZespolu select z).First();
             if (!ModelState.IsValid)
                 return View(originalZespol);
 
@@ -74,7 +70,7 @@ namespace Fonoteka.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utwor personalDetail = _db.Zespol.Find(id);
+            Utwor personalDetail = _db.Utwor.Find(id);
             if (personalDetail == null)
             {
                 return HttpNotFound();
@@ -87,11 +83,10 @@ namespace Fonoteka.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Utwor personalDetail = _db.Zespol.Find(id);
-            _db.Zespol.Remove(personalDetail);
+            Utwor personalDetail = _db.Utwor.Find(id);
+            _db.Utwor.Remove(personalDetail);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-
     }
 }

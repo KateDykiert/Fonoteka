@@ -14,16 +14,11 @@ namespace Fonoteka.Models
     
     public partial class Utwor
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Utwor()
-        {
-            this.Utwor = new HashSet<Utwor>();
-        }
-    
+        public int IdUtworu { get; set; }
         public int IdZespolu { get; set; }
-        public string Nazwa { get; set; }
+        public string Tytul { get; set; }
+        public System.TimeSpan CzasTrwania { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Utwor> Utwor { get; set; }
+        public virtual Utwor Zespol { get; set; }
     }
 }

@@ -156,11 +156,30 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UtworController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Utwor.cs">
+      <DependentUpon>UtworDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UtworDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UtworDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UtworDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UtworDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UtworDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UtworDBModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Zespol.cs">
-      <DependentUpon>ZespolDBModel.tt</DependentUpon>
+      <DependentUpon>UtworDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ZespolDBModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -192,6 +211,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\UtworDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UtworDBModel.edmx</DependentUpon>
+      <LastGenOutput>UtworDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UtworDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UtworDBModel.edmx</DependentUpon>
+      <LastGenOutput>UtworDBModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ZespolDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ZespolDBModel.edmx</DependentUpon>
@@ -213,6 +242,13 @@
     </EntityDeploy>
     <Content Include="Models\ZespolDBModel.edmx.diagram">
       <DependentUpon>ZespolDBModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\UtworDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UtworDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UtworDBModel.edmx.diagram">
+      <DependentUpon>UtworDBModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -239,8 +275,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Delete.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Utwor\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

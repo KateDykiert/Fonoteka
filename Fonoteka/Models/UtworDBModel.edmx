@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UtworDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Utwor">
+          <Key>
+            <PropertyRef Name="IdUtworu" />
+          </Key>
+          <Property Name="IdUtworu" Type="int" Nullable="false" />
+          <Property Name="IdZespolu" Type="int" Nullable="false" />
+          <Property Name="Tytul" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="CzasTrwania" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zespol">
+          <Key>
+            <PropertyRef Name="IdZespolu" />
+          </Key>
+          <Property Name="IdZespolu" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Utwor__IdZespolu__36B12243">
+          <End Role="Zespol" Type="Self.Zespol" Multiplicity="1" />
+          <End Role="Utwor" Type="Self.Utwor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zespol">
+              <PropertyRef Name="IdZespolu" />
+            </Principal>
+            <Dependent Role="Utwor">
+              <PropertyRef Name="IdZespolu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UtworDBModelStoreContainer">
+          <EntitySet Name="Utwor" EntityType="Self.Utwor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zespol" EntityType="Self.Zespol" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Utwor__IdZespolu__36B12243" Association="Self.FK__Utwor__IdZespolu__36B12243">
+            <End Role="Zespol" EntitySet="Zespol" />
+            <End Role="Utwor" EntitySet="Utwor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UtworDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Utwor">
+          <Key>
+            <PropertyRef Name="IdUtworu" />
+          </Key>
+          <Property Name="IdUtworu" Type="Int32" Nullable="false" />
+          <Property Name="IdZespolu" Type="Int32" Nullable="false" />
+          <Property Name="Tytul" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CzasTrwania" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Zespol" Relationship="UtworDBModel.FK__Utwor__IdZespolu__36B12243" FromRole="Utwor" ToRole="Zespol" />
+        </EntityType>
+        <EntityContainer Name="UtworDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Utwor" EntityType="Self.Utwor" />
+          <EntitySet Name="Zespol" EntityType="UtworDBModel.Zespol" />
+          <AssociationSet Name="FK__Utwor__IdZespolu__36B12243" Association="UtworDBModel.FK__Utwor__IdZespolu__36B12243">
+            <End Role="Zespol" EntitySet="Zespol" />
+            <End Role="Utwor" EntitySet="Utwor" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Zespol">
+          <Key>
+            <PropertyRef Name="IdZespolu" />
+          </Key>
+          <Property Name="IdZespolu" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Utwor" Relationship="UtworDBModel.FK__Utwor__IdZespolu__36B12243" FromRole="Zespol" ToRole="Utwor" />
+        </EntityType>
+        <Association Name="FK__Utwor__IdZespolu__36B12243">
+          <End Type="UtworDBModel.Zespol" Role="Zespol" Multiplicity="1" />
+          <End Type="UtworDBModel.Utwor" Role="Utwor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zespol">
+              <PropertyRef Name="IdZespolu" />
+            </Principal>
+            <Dependent Role="Utwor">
+              <PropertyRef Name="IdZespolu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UtworDBModelStoreContainer" CdmEntityContainer="UtworDBEntities">
+          <EntitySetMapping Name="Utwor">
+            <EntityTypeMapping TypeName="UtworDBModel.Utwor">
+              <MappingFragment StoreEntitySet="Utwor">
+                <ScalarProperty Name="IdUtworu" ColumnName="IdUtworu" />
+                <ScalarProperty Name="IdZespolu" ColumnName="IdZespolu" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+                <ScalarProperty Name="CzasTrwania" ColumnName="CzasTrwania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zespol">
+            <EntityTypeMapping TypeName="UtworDBModel.Zespol">
+              <MappingFragment StoreEntitySet="Zespol">
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="IdZespolu" ColumnName="IdZespolu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

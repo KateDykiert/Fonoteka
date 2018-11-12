@@ -13,10 +13,10 @@ namespace Fonoteka.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ZespolDBEntities : DbContext
+    public partial class UtworDBEntities : DbContext
     {
-        public ZespolDBEntities()
-            : base("name=ZespolDBEntities")
+        public UtworDBEntities()
+            : base("name=UtworDBEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace Fonoteka.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Utwor> Zespol { get; set; }
+        public virtual DbSet<Utwor> Utwor { get; set; }
+        public virtual DbSet<Utwor> Utwor { get; set; }
     }
 }
