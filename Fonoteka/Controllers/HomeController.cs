@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -61,6 +62,32 @@ namespace Fonoteka.Controllers
             _db.Entry(originalZespol).CurrentValues.SetValues(zespolToEdit);
             _db.SaveChanges();
 
+            return RedirectToAction("Index");
+        }
+        
+        // GET: Zespol/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Zespol personalDetail = _db.Zespol.Find(id);
+            if (personalDetail == null)
+            {
+                return HttpNotFound();
+            }
+            return View(personalDetail);
+        }
+
+        // POST: Zespol/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Zespol personalDetail = _db.Zespol.Find(id);
+            _db.Zespol.Remove(personalDetail);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
