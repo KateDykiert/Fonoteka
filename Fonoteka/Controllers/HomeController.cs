@@ -25,67 +25,44 @@ namespace Fonoteka.Controllers
         // GET: Home/Create
         public ActionResult Create()
         {
+            
+        
             return View();
         }
 
         // POST: Home/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Exclude="Id")] Zespol zespolToCreate)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
+            if (!ModelState.IsValid)
                 return View();
-            }
+
+            _db.Zespol.Add(zespolToCreate);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Home/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var zespolToEdit = (from z in _db.Zespol where z.IdZespolu == id select z).First();
+            return View(zespolToEdit);
         }
 
         // POST: Home/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Zespol zespolToEdit)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var originalZespol = (from z in _db.Zespol where z.IdZespolu == zespolToEdit.IdZespolu select z).First();
+            if (!ModelState.IsValid)
+                return View(originalZespol);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _db.Entry(originalZespol).CurrentValues.SetValues(zespolToEdit);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        // GET: Home/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Home/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
